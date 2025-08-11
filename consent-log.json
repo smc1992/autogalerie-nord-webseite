@@ -1,0 +1,11 @@
+[
+  {
+    "timestamp": "2025-08-10T19:45:28.743Z",
+    "ip": "127.0.0.1",
+    "consent": {
+      "necessary": true,
+      "analytics": true,
+      "marketing": true
+    }
+  }
+]

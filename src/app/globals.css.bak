@@ -1,0 +1,27 @@
+/* Exact CSS from original index.html - NO Tailwind directives */
+:where([class^="ri-"])::before {
+  content: "\f3c2";
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.group:hover .group-hover\:block {
+  display: block;
+}
+
+.hero-bg {
+  background-image: url('/Bilder/Hintergrundbild Hero.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.sticky-header {
+  transition: all 0.3s ease;
+}
+
+.sticky-header.scrolled {
+  box-shadow: 0 2px 20px rgba(229, 35, 24, 0.2);
+}

@@ -1,0 +1,8 @@
+/* Import Montserrat and Pacifico fonts */
+@import url('/fonts/montserrat.css');
+@import url('/fonts/pacifico.css');
+
+/* Set default font family */
+body {
+  font-family: 'Montserrat', sans-serif;
+}

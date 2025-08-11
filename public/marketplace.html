@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fahrzeug-Marktplatz</title>
+  <style>
+    /* 
+      This CSS is crucial for the dynamic height adjustment to work.
+      It ensures the body can grow to its full content height, which is then measured by the script.
+      'overflow: visible' is key to getting the correct scrollHeight.
+    */
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: auto; /* Allow height to be determined by content */
+      overflow: visible; /* Ensure scrollHeight reflects the full content height */
+    }
+  </style>
+</head>
+<body>
+  <!-- The container for the marketplace widget -->
+  <div id="am-marketplace">
+    <div id="am-marketplace-nav" style="display: none;"></div>
+  </div>
+
+  <!-- The external script loader -->
+  <script 
+    src="https://cdn.dein.auto/pxc-amm/loader.nocache" 
+    api-key="0536fa11-99df-43f8-bf26-42af233f5478"
+    urls-privacy='{"de":"https://autogalerie-nord.de/datenschutz"}'
+    urls-imprint='{"de":"https://autogalerie-nord.de/impressum"}'
+    async>
+  </script>
+
+  <script>
+    // This script sends the content's height to the parent window
+    const sendHeight = () => {
+      // Use scrollHeight of the documentElement for better accuracy
+      const height = document.documentElement.scrollHeight;
+      console.log('[iFrame] Calculated height:', height);
+      
+      // Send the height to the parent window.
+      if (window.parent) {
+        window.parent.postMessage({ type: 'resize-iframe', height: height }, '*');
+      }
+    };
+
+    // Use a MutationObserver to watch for DOM changes, which is more reliable
+    // for content loaded asynchronously by other scripts.
+    const observer = new MutationObserver(sendHeight);
+    
+    // Observe the body for subtree modifications and child list changes.
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true
+    });
+
+    // Also send height on initial load and when the window is resized
+    window.onload = sendHeight;
+    window.onresize = sendHeight;
+
+    // Fallback: send height periodically in case observers miss something
+    setInterval(sendHeight, 1000);
+  </script>
+</body>
+</html>
