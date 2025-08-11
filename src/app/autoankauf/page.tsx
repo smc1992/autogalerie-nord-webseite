@@ -11,7 +11,7 @@ export default function Autoankauf() {
           <div className="container mx-auto px-6 lg:px-12">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-4xl lg:text-5xl font-bold mb-6">Autoankauf</h1>
-              <p className="text-gray-600 mt-2">Wir kümmern uns um die gesamte Abwicklung - von der Abmeldung Ihres alten Fahrzeugs bis zur Auszahlung. Alles aus einer Hand, schnell und unkompliziert.</p>
+              <p className="text-gray-300 mt-2">Wir kümmern uns um die gesamte Abwicklung - von der Abmeldung Ihres alten Fahrzeugs bis zur Auszahlung. Alles aus einer Hand, schnell und unkompliziert.</p>
             </div>
           </div>
         </section>

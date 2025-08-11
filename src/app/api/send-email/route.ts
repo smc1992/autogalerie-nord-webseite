@@ -65,7 +65,7 @@ export async function POST(request: Request) {
 
     const mailOptions = {
       from: `"Webseite Autogalerie Nord" <${process.env.SMTP_SENDER || process.env.SMTP_USER}>`,
-      to: process.env.SMTP_RECIPIENT,
+      to: process.env.SMTP_TO_EMAIL,
       replyTo: formData.email,
       subject: subject,
       html: htmlBody,
