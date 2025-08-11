@@ -51,19 +51,6 @@ export default function Finanzierung() {
     setLoading(true);
 
     try {
-      const messageBody = `
-        Eine neue Finanzierungsanfrage ist eingegangen:
-        --------------------------------------------------
-        Name: ${formData.firstName} ${formData.lastName}
-        E-Mail: ${formData.email}
-        Telefon: ${formData.phone || 'Nicht angegeben'}
-        --------------------------------------------------
-        Monatliches Nettoeinkommen: ${formData.income ? formData.income + ' €' : 'Nicht angegeben'}
-        Gewünschter Fahrzeugpreis: ${formData.vehiclePrice ? formData.vehiclePrice + ' €' : 'Nicht angegeben'}
-        Geplante Anzahlung: ${formData.downPayment ? formData.downPayment + ' €' : 'Nicht angegeben'}
-        --------------------------------------------------
-      `;
-
       const response = await fetch('/api/send-email', {
         method: 'POST',
         headers: {
@@ -71,15 +58,12 @@ export default function Finanzierung() {
         },
         body: JSON.stringify({
           subject: 'Neue Finanzierungsanfrage',
-          name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          phone: formData.phone,
-          message: messageBody,
+          ...formData,
         }),
       });
 
       if (response.ok) {
-        router.push('/danke');
+        router.push('/danke/finanzierung');
       } else {
         const result = await response.json();
         setError(result.message || 'Fehler beim Senden der Anfrage.');

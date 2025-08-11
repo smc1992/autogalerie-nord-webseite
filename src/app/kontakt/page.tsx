@@ -37,6 +37,11 @@ export default function KontaktPage() {
       return;
     }
 
+    if (!formData.phone) {
+        setError('Bitte geben Sie Ihre Telefonnummer an.');
+        return;
+    }
+
     setLoading(true);
 
     try {
@@ -46,16 +51,13 @@ export default function KontaktPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          subject: formData.subject,
+          ...formData,
           name: `${formData.firstName} ${formData.lastName}`,
-          email: formData.email,
-          phone: formData.phone,
-          message: formData.message,
         }),
       });
 
       if (response.ok) {
-        router.push('/danke');
+        router.push('/danke/kontakt');
       } else {
         const result = await response.json();
         setError(result.message || 'Fehler beim Senden der Anfrage.');
@@ -213,12 +215,13 @@ export default function KontaktPage() {
                     
                     <div>
                       <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
-                        Telefon
+                        Telefon *
                       </label>
                       <input
                         type="tel"
                         id="phone"
                         name="phone"
+                        required
                         value={formData.phone}
                         onChange={handleChange}
                         className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"

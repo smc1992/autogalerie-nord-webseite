@@ -48,15 +48,12 @@ export default function Businessloesungen() {
         },
         body: JSON.stringify({
           subject: 'B2B-Anfrage für Geschäftslösungen',
-          name: `${formData.name} (${formData.companyName})`,
-          email: formData.email,
-          phone: formData.phone,
-          message: `Gewünschter Service: ${formData.service}\n\nNachricht:\n${formData.message}`,
+          ...formData,
         }),
       });
 
       if (response.ok) {
-        router.push('/danke');
+        router.push('/danke/businessloesungen');
       } else {
         const result = await response.json();
         setError(result.message || 'Fehler beim Senden der Anfrage.');
