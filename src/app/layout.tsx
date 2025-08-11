@@ -82,6 +82,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Skripte exakt wie in index.html geladen (ohne das fälschlicherweise angenommene jQuery) */}
         <Script src="/js/tailwind.js" strategy="beforeInteractive" />
         <Script id="tailwind-config" strategy="beforeInteractive" dangerouslySetInnerHTML={{ __html: tailwindConfig }} />
+
+        {/* Chatbot Widget Script */}
+        <Script 
+          id="chatbot-widget"
+          src="https://app.chatbot-smc.de/js/widget/knvkqmx3rs1hs1eh/float.js" 
+          strategy="afterInteractive"
+          async
+          defer
+        />
       </body>
     </html>
   );
